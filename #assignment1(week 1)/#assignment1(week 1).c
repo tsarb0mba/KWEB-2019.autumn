@@ -1,0 +1,12 @@
+//
+//  #assignment1(week 1).c
+//  
+//
+//  Created by TSAR on 26/09/2019.
+//
+
+#include "#assignment1(week 1).h"
+#include <stdio.h>
+int main() { int num = 6;
+int product = 720;
+printf("Factorial of %d is %d\n", num, product); }
