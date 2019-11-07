@@ -9,13 +9,13 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200; 
     res.setHeader('Content-Type', 'text/plain'); 
     
-    let query=querystring.parse(req.url).query;
+    let query = querystring.parse(url.parse(req.url).query);
+    let repo= query.repo;
     let the_url="https://api.github.com/repos/"+query.repo;
     let pathname=url.parse(req.url).pathname;//catch하려고
 
     axios.get(the_url)
         .then(function(response){
-            let repo=query.repo;
             let stargazers=response.data.stargazers_count;
             let openissue=reponse.data.open_issues_count;
             let result="repo:"+repo+"\n"+"stargazers_count:"+stargazers+"\n"+"onpen_issues_count:"+onpenissue;
