@@ -1,8 +1,7 @@
 const calc={
-    add:(a,b)=>a+b,
-    sub:(a,b)=>a-b,
-    mult:(a,b)=>a*b,
-    div:(a,b)=>a/b
-}
-
-module.exports = calc;
+    add:function(a,b) {return a+b},
+    sub:function(a,b) {return a-b},
+    mult:function(a,b) {return a*b},
+    div:function(a,b) {return a/b}
+};
+module.exports = calc; 
