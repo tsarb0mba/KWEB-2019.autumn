@@ -1,5 +1,5 @@
 const http = require('http');
-const calc = require('./calc');
+const calc = require('./calc.js');
 const url=require('url');
 const querystring=require('querystring');
 
@@ -10,22 +10,24 @@ const server = http.createServer((req, res) => {
     res.setHeader('Content-Type', 'text/plain'); 
     
     let query = querystring.parse(url.parse(req.url).query); 
-    let pathname=url.parse(req.url).pathname;//catch하려고
+    let pathname=url.parse(req.url).pathname;//문제가 체크
 
-    let num1 = parseInt(query.a);
-    let num2 = parseInt(query.b);
+    let a = parseInt(query.a);
+    let b = parseInt(query.b);
     let op = query.operator;
-    
-    try{
-        let result=calc[op](num1, num2);
-        res.end("result");
-    }
-    catch{
-        if(pathname!=='/')
             res.end("Page not found");
-        else if(!query.a||!query.b||!query.operator)
-            res.end("!");
+
+    if(!query.a||!query.b||!query.operator)//오류체크
+        res.end("Invalid Query!");
+    else if(pathname!=='/')//오류체크
+        res.end("Page not found");
+    else{//연산
+        if(op == 'add') res.end(calc.add(a,b));
+        else if(op == 'sub') res.end(calc.subtract(a,b));
+        else if(op == 'mult') res.end(calc.mult(a,b));
+        else if(op == 'div') res.end(calc.div(a,b));
     }
+    
     
 });
 server.listen(port, hostname, () => {
