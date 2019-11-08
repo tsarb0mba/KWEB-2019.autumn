@@ -15,7 +15,6 @@ const server = http.createServer((req, res) => {
     let a = parseInt(query.a);
     let b = parseInt(query.b);
     let op = query.operator;
-            res.end("Page not found");
 
     if(!query.a||!query.b||!query.operator)//오류체크
         res.end("Invalid Query!");
