@@ -27,7 +27,7 @@ app.get('/diaries',(req,res)=>{
 app.get('/diary/:id',(req,res)=>{
     //res.end(req.params.title);
     if(!diaryBook[req.params.id]){
-        res.send(msg404+"Diary #${req.params.id} dose not exist!");
+        res.send("Request   |GET /diarg/${req.params.id}"+msg404+"Diary #${req.params.id} dose not exist!");
     }
     else{
         if(diaryBook[req.params.id].isActive===flase)
@@ -36,6 +36,7 @@ app.get('/diary/:id',(req,res)=>{
             res.send('Request    |GET /diary| id=${req.params.id}'+msg200+"${req.params.id}: ${diaryBook[req.params.id].title} (${diaryBook[req.params.id].isActive})");
     }
 });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => res.send('GET /'));
