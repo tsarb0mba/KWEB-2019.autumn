@@ -24,10 +24,17 @@ app.get('/diaries',(req,res)=>{
     else
             res.send("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
 });
-app.get('/diary/:title',(req,res)=>{
+app.get('/diary/:id',(req,res)=>{
     //res.end(req.params.title);
-    diaryBook[id]=new diary(id++,req.params.title,true);
-    res.send('Request    |POST /diary| title='+req.params.title+msg200+"Added Diary #"+id+": "+req.params.title+" "+"("+diaryBook[id-1].isActive+")");
+    if(!diaryBook[req.params.id]){
+        res.send(msg404+"Diary #${req.params.id} dose not exist!");
+    }
+    else{
+        if(diaryBook[req.params.id].isActive===flase)
+            res.send('Request    |GET /diary/${req.params.id}'+msg200+"Diary #${req.params.id} is already been deleted");
+        else 
+            res.send('Request    |GET /diary| id=${req.params.id}'+msg200+"${req.params.id}: ${diaryBook[req.params.id].title} (${diaryBook[req.params.id].isActive})");
+    }
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
