@@ -46,7 +46,17 @@ app.post('/diary',(req,res)=>{
     res.send("Request   | POST /diary | title=${req.body.title}"+msg200+"Added Diary #${diaryBook[id]}: ${req.body.title} (${diaryBook[id].isActive}) ");
     id++;
 });
-app.put('/diary',(req,res)=>{});
+ 
+app.put('/diary',(req,res)=>{
+    if(!req.body.id)
+        res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg404+"Diary does not exist!");
+    else if(diaryBook[req.body.id].isActive[false])
+        res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg200+"Diary #${req.body.id} has already been deleted");
+    else{
+        diaryBook[req.body.id].title=req.body.title;
+        res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg200+"Changed Diary #${req.body.id}: ${req.body.title} (true)");
+    }
+});
 app.delete('/diary',(req,res)=>{});
 
 
