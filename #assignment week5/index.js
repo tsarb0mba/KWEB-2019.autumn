@@ -54,7 +54,18 @@ app.put('/diary',(req,res)=>{
         res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg200+"Changed Diary #${req.body.id}: ${req.body.title} (true)");
     }
 });
-app.delete('/diary',(req,res)=>{});
+app.delete('/diary',(req,res)=>{
+    if(!diaryBook[req.body.id])
+        res.send("Request   | DELECT /diary | id=${res.body.id}"+msg404+"Diary does not exist!");
+    else if(diaryBook[req.body.id].isActive[false])
+        res.send("Request   | DELECT /diary | id=${res.body.id}"+msg200+"Diary #${req.body.id} has already been deleted");
+    else{
+        diaryBook[req.body.id].title='';
+        diaryBook[req.body.id].isActive=false;
+        res.send("Request   | DELECT /diary | id=${res.body.id}"+msg200+"Deleted diary #${req.body.id}: (${diaryBook[req.body.id].isActive}");
+    }
+});
+
 
 
 app.listen(port, () => console.log(`Week 5 practice server is working...`));
