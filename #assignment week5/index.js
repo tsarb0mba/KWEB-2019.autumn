@@ -24,6 +24,10 @@ app.get('/diaries',(req,res)=>{
     else
             res.send("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
 });
+app.get('/diary', (req, res) => {
+    const query = req.query;
+    res.redirect(`/diary/${Object.values(query)[0]}`);
+});
 app.get('/diary/:id',(req,res)=>{
     //res.end(req.params.title);
     if(!diaryBook[req.params.id]){
@@ -36,6 +40,14 @@ app.get('/diary/:id',(req,res)=>{
             res.send('Request    |GET /diary| id=${req.params.id}'+msg200+"${req.params.id}: ${diaryBook[req.params.id].title} (${diaryBook[req.params.id].isActive})");
     }
 });
+
+app.post('/diary',(req,res)=>{
+    diaryBook.push(id=id, title=req.body.title,isActive=true);
+    res.send("Request   | POST /diary | title=${req.body.title}"+msg200+"Added Diary #${diaryBook[id]}: ${req.body.title} (${diaryBook[id].isActive}) ");
+    id++;
+});
+app.put('/diary',(req,res)=>{});
+app.delete('/diary',(req,res)=>{});
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
