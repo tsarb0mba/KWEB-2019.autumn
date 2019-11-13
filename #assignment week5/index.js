@@ -5,11 +5,8 @@ const app = express();
 const port = 3000;
 
 const diaryBook=[];
-function diary(id,title,isActive){
-    this.id= id;
-    this.title=title;
-    this.isActive=isActive;
-}
+
+
 let msg404 = 'Response  |404<br>';
 let msg200="<br>"+"Response  |200"+"<br>";
 let id=0;
@@ -22,7 +19,7 @@ app.get('/diaries',(req,res)=>{
     if(diaryBook.length===0)
         res.send("Request   |GET/"+msg200+"No diary written!");
     else
-            res.send("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
+        res.send("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
 });
 app.get('/diary', (req, res) => {
     const query = req.query;
@@ -48,7 +45,7 @@ app.post('/diary',(req,res)=>{
 });
  
 app.put('/diary',(req,res)=>{
-    if(!req.body.id)
+    if(!diaryBook[req.body.id])
         res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg404+"Diary does not exist!");
     else if(diaryBook[req.body.id].isActive[false])
         res.send("Request   | PUT /diary | id=${res.body.id} title={res.body.title}"+msg200+"Diary #${req.body.id} has already been deleted");
@@ -60,6 +57,4 @@ app.put('/diary',(req,res)=>{
 app.delete('/diary',(req,res)=>{});
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.get('/', (req, res) => res.send('GET /'));
 app.listen(port, () => console.log(`Week 5 practice server is working...`));
