@@ -10,7 +10,7 @@ function diary(id,title,isActive){
     this.title=title;
     this.isActive=isActive;
 }
-let msg404 = 'Message you want to respond when 404<br>';
+let msg404 = 'Response  |404<br>';
 let msg200="<br>"+"Response  |200"+"<br>";
 let id=0;
 
