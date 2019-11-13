@@ -22,7 +22,7 @@ app.get('/diaries',(req,res)=>{
     if(diaryBook.length===0)
         res.send("Request   |GET/"+msg200+"No diary written!");
     else
-            res.end("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
+            res.send("Request    |GET/"+msg200+Object.keys(diaryBook).map(k => `#${k}: ${diaryBook[k].title} (${diaryBook[k].isActive})`).join('\n'));
 });
 app.get('/diary/:title',(req,res)=>{
     //res.end(req.params.title);
