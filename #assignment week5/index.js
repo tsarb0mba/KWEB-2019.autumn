@@ -7,7 +7,7 @@ const port = 3000;
 const diaryBook=[];
 
 
-let msg404 = 'Response  |404<br>';
+let msg404 = '<br>Response  |404<br>';
 let msg200="<br>"+"Response  |200"+"<br>";
 let id=0;
 
@@ -26,9 +26,8 @@ app.get('/diary', (req, res) => {
     res.redirect(`/diary/${Object.values(query)[0]}`);
 });
 app.get('/diary/:id',(req,res)=>{
-    //res.end(req.params.title);
     if(!diaryBook[req.params.id]){
-        res.send("Request   |GET /diarg/${req.params.id}"+msg404+"Diary #${req.params.id} dose not exist!");
+        res.send("Request   |GET /diary/${req.params.id}"+msg404+"Diary #${req.params.id} dose not exist!");
     }
     else{
         if(diaryBook[req.params.id].isActive===flase)
